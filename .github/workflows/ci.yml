@@ -78,4 +78,4 @@ jobs:
 
       - name: Push Helm chart
         run: |
-          helm push service-${{ steps.version.outputs.version }}.tgz oci://${{ env.CHART_PATH }}
+          helm push service-chart-${{ steps.version.outputs.version }}.tgz oci://${{ env.CHART_PATH }}

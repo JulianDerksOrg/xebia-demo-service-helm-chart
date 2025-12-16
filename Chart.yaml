@@ -1,5 +1,5 @@
 apiVersion: v2
-name: service
+name: service-chart
 description: A generic Helm chart for deploying microservices
 type: application
 version: 1.0.0
