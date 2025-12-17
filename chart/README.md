@@ -95,7 +95,7 @@ A generic Helm chart for deploying microservices.
 
 | Name                  | Description                    | Value   |
 | --------------------- | ------------------------------ | ------- |
-| `ingress.enabled`     | Enable ingress                 | `false` |
+| `ingress.enabled`     | Enable ingress                 | `true`  |
 | `ingress.className`   | Ingress class name             | `nginx` |
 | `ingress.annotations` | Ingress annotations            | `{}`    |
 | `ingress.hostname`    | Ingress hostname               | `""`    |

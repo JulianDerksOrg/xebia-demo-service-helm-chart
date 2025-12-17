@@ -242,7 +242,7 @@
                 "enabled": {
                     "type": "boolean",
                     "description": "Enable ingress",
-                    "default": false
+                    "default": true
                 },
                 "className": {
                     "type": "string",
