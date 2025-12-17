@@ -27,6 +27,15 @@ A generic Helm chart for deploying microservices.
 | `app.annotations`                                   | Pod annotations                      | `{}`      |
 | `app.labels`                                        | Pod labels                           | `{}`      |
 | `app.resources`                                     | Resource requests and limits         | `{}`      |
+| `app.resources`                                     | Example:                             |           |
+| `app.resources`                                     | ```yaml                              |           |
+| `app.resources`                                     | requests:                            |           |
+| `app.resources`                                     | cpu: 100m                            |           |
+| `app.resources`                                     | memory: 128Mi                        |           |
+| `app.resources`                                     | limits:                              |           |
+| `app.resources`                                     | cpu: 500m                            |           |
+| `app.resources`                                     | memory: 256Mi                        |           |
+| `app.resources`                                     | ```                                  |           |
 | `app.nodeSelector`                                  | Node selector                        | `{}`      |
 | `app.tolerations`                                   | Tolerations                          | `[]`      |
 | `app.affinity`                                      | Affinity rules                       | `{}`      |
@@ -84,42 +93,47 @@ A generic Helm chart for deploying microservices.
 
 ### Ingress Configuration
 
-| Name                  | Description               | Value   |
-| --------------------- | ------------------------- | ------- |
-| `ingress.enabled`     | Enable ingress            | `false` |
-| `ingress.className`   | Ingress class name        | `""`    |
-| `ingress.annotations` | Ingress annotations       | `{}`    |
-| `ingress.hosts`       | Ingress hosts             | `[]`    |
-| `ingress.tls`         | Ingress TLS configuration | `[]`    |
+| Name                  | Description                      | Value   |
+| --------------------- | -------------------------------- | ------- |
+| `ingress.enabled`     | Enable ingress                   | `false` |
+| `ingress.className`   | Ingress class name               | `nginx` |
+| `ingress.annotations` | Ingress annotations              | `{}`    |
+| `ingress.hosts`       | Ingress hosts                    | `[]`    |
+| `ingress.hosts`       | Example: `["myapp.example.com"]` |         |
+| `ingress.tls`         | Ingress TLS configuration        | `[]`    |
 
 ### ConfigMap Environment Configuration
 
-| Name              | Description                                       | Value |
-| ----------------- | ------------------------------------------------- | ----- |
-| `configEnv.pairs` | ConfigMap environment variables (key-value pairs) | `{}`  |
+| Name              | Description                                        | Value |
+| ----------------- | -------------------------------------------------- | ----- |
+| `configEnv.pairs` | ConfigMap environment variables (key-value pairs)  | `{}`  |
+| `configEnv.pairs` | Example: `{ VERSION: "1.0.0", LOG_LEVEL: "info" }` |       |
 
 ### External Secrets Configuration
 
-| Name                      | Description                                       | Value   |
-| ------------------------- | ------------------------------------------------- | ------- |
-| `secretEnv.enabled`       | Enable External Secrets for environment variables | `false` |
-| `secretEnv.pairs`         | Secret key to GCP Secret Manager key mapping      | `{}`    |
-| `secretEnv.templatePairs` | Template pairs for secret transformation          | `{}`    |
+| Name                      | Description                                                  | Value |
+| ------------------------- | ------------------------------------------------------------ | ----- |
+| `secretEnv.pairs`         | Secret key to GCP Secret Manager key mapping                 | `{}`  |
+| `secretEnv.pairs`         | Example: `{ DB_PASSWORD: "my-project/db-password" }`         |       |
+| `secretEnv.templatePairs` | Template pairs for secret transformation                     | `{}`  |
+| `secretEnv.templatePairs` | Example: `{ DATABASE_URL: "{{ .DB_PASSWORD | toString }}" }` |       |
 
 ### Google Cloud Platform Configuration
 
-| Name                             | Description                                       | Value          |
-| -------------------------------- | ------------------------------------------------- | -------------- |
-| `gcp.projectId`                  | GCP project ID                                    | `""`           |
-| `gcp.serviceAccount.enabled`     | Enable GCP service account with Workload Identity | `false`        |
-| `gcp.database.enabled`           | Enable Cloud SQL database resources               | `false`        |
-| `gcp.database.instanceName`      | Cloud SQL instance name                           | `""`           |
-| `gcp.database.databaseName`      | Database name (defaults to release name)          | `""`           |
-| `gcp.database.userName`          | Database user name (defaults to release name)     | `""`           |
-| `gcp.database.passwordSecretRef` | Secret reference for database password            | `{}`           |
-| `gcp.storage.enabled`            | Enable GCS bucket resources                       | `false`        |
-| `gcp.storage.location`           | GCS bucket location                               | `europe-west4` |
-| `gcp.storage.storageClass`       | GCS storage class                                 | `STANDARD`     |
-| `gcp.storage.objectAdmins`       | IAM members with objectAdmin role                 | `[]`           |
+| Name                         | Description                                       | Value          |
+| ---------------------------- | ------------------------------------------------- | -------------- |
+| `gcp.projectId`              | GCP project ID                                    | `""`           |
+| `gcp.projectId`              | Example: `"my-gcp-project-123"`                   |                |
+| `gcp.serviceAccount.enabled` | Enable GCP service account with Workload Identity | `false`        |
+| `gcp.database.enabled`       | Enable Cloud SQL database resources               | `false`        |
+| `gcp.database.instanceName`  | Cloud SQL instance name                           | `""`           |
+| `gcp.database.instanceName`  | Example: `"my-project:europe-west4:my-instance"`  |                |
+| `gcp.database.databaseName`  | Database name (defaults to release name)          | `""`           |
+| `gcp.database.userName`      | Database user name (defaults to release name)     | `""`           |
+| `gcp.storage.enabled`        | Enable GCS bucket resources                       | `false`        |
+| `gcp.storage.location`       | GCS bucket location                               | `europe-west4` |
+| `gcp.storage.storageClass`   | GCS storage class                                 | `STANDARD`     |
+| `gcp.storage.objectAdmins`   | IAM members with objectAdmin role                 | `[]`           |
+| `gcp.storage.objectAdmins`   | Example: `["group:developers@myorg.com"]`         |                |
 
 <!-- This section will be auto-generated by readme-generator -->

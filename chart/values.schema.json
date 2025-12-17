@@ -247,7 +247,7 @@
                 "className": {
                     "type": "string",
                     "description": "Ingress class name",
-                    "default": ""
+                    "default": "nginx"
                 },
                 "hosts": {
                     "type": "array",
@@ -264,16 +264,6 @@
                     "items": {
                         "type": "string"
                     }
-                }
-            }
-        },
-        "secretEnv": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Enable External Secrets for environment variables",
-                    "default": false
                 }
             }
         },
