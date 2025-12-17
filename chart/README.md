@@ -93,13 +93,13 @@ A generic Helm chart for deploying microservices.
 
 ### Ingress Configuration
 
-| Name                  | Description                    | Value   |
-| --------------------- | ------------------------------ | ------- |
-| `ingress.enabled`     | Enable ingress                 | `true`  |
-| `ingress.className`   | Ingress class name             | `nginx` |
-| `ingress.annotations` | Ingress annotations            | `{}`    |
-| `ingress.hostname`    | Ingress hostname               | `nil`   |
-| `ingress.hostname`    | Example: `"myapp.example.com"` |         |
+| Name                  | Description                    | Value                |
+| --------------------- | ------------------------------ | -------------------- |
+| `ingress.enabled`     | Enable ingress                 | `true`               |
+| `ingress.className`   | Ingress class name             | `nginx`              |
+| `ingress.annotations` | Ingress annotations            | `{}`                 |
+| `ingress.hostname`    | Ingress hostname               | `argocd.example.com` |
+| `ingress.hostname`    | Example: `"myapp.example.com"` |                      |
 
 ### ConfigMap Environment Configuration
 

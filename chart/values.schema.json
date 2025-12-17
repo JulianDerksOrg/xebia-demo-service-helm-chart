@@ -252,7 +252,7 @@
                 "hostname": {
                     "type": "string",
                     "description": "Ingress hostname",
-                    "default": ""
+                    "default": "argocd.example.com"
                 }
             }
         },

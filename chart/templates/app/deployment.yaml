@@ -82,6 +82,9 @@ spec:
                 name: {{ include "service.fullname" . }}-secret-env
             {{- end }}
           {{- end }}
+          env:
+          - name: VERSION
+            value: "{{ .Values.image.tag }}"
           {{- with .Values.app.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
