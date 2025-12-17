@@ -70,13 +70,13 @@ spec:
             timeoutSeconds: {{ .Values.app.startupProbe.timeoutSeconds }}
             failureThreshold: {{ .Values.app.startupProbe.failureThreshold }}
           {{- end }}
-          {{- if or .Values.configEnv.pairs .Values.secretEnv.enabled }}
+          {{- if or .Values.configEnv.pairs .Values.secretEnv.pairs }}
           envFrom:
             {{- if .Values.configEnv.pairs }}
             - configMapRef:
                 name: {{ include "service.fullname" . }}-config-env
             {{- end }}
-            {{- if .Values.secretEnv.enabled }}
+            {{- if or .Values.secretEnv.pairs }}
             - secretRef:
                 name: {{ include "service.fullname" . }}-secret-env
             {{- end }}
