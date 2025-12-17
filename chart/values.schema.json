@@ -249,21 +249,10 @@
                     "description": "Ingress class name",
                     "default": "nginx"
                 },
-                "hosts": {
-                    "type": "array",
-                    "description": "Ingress hosts",
-                    "default": "[]",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "tls": {
-                    "type": "array",
-                    "description": "Ingress TLS configuration",
-                    "default": "[]",
-                    "items": {
-                        "type": "string"
-                    }
+                "hostname": {
+                    "type": "string",
+                    "description": "Ingress hostname",
+                    "default": ""
                 }
             }
         },

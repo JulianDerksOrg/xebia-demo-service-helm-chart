@@ -125,11 +125,9 @@ ingress:
   className: "nginx"
   ## @param ingress.annotations [object] Ingress annotations
   annotations: {}
-  ## @param ingress.hosts [array] Ingress hosts
-  ## @extra ingress.hosts Example: `["myapp.example.com"]`
-  hosts: []
-  ## @param ingress.tls [array] Ingress TLS configuration
-  tls: []
+  ## @param ingress.hostname Ingress hostname
+  ## @extra ingress.hostname Example: `"myapp.example.com"`
+  hostname: ""
 
 ## @section ConfigMap Environment Configuration
 configEnv:
