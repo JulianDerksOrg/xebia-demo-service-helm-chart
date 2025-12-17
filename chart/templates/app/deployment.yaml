@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "service.labels" . | nindent 4 }}
 spec:
+  revisionHistoryLimit: 0
   {{- if not .Values.app.autoscaling.enabled }}
   replicas: {{ .Values.app.replicaCount }}
   {{- end }}
@@ -23,7 +24,6 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      revisionHistoryLimit: 0
       serviceAccountName: {{ include "service.serviceAccountName" . }}
       {{- with .Values.app.podSecurityContext }}
       securityContext:

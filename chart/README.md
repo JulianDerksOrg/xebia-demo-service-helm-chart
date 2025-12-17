@@ -98,7 +98,7 @@ A generic Helm chart for deploying microservices.
 | `ingress.enabled`     | Enable ingress                 | `true`  |
 | `ingress.className`   | Ingress class name             | `nginx` |
 | `ingress.annotations` | Ingress annotations            | `{}`    |
-| `ingress.hostname`    | Ingress hostname               | `""`    |
+| `ingress.hostname`    | Ingress hostname               | `nil`   |
 | `ingress.hostname`    | Example: `"myapp.example.com"` |         |
 
 ### ConfigMap Environment Configuration

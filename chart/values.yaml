@@ -133,7 +133,7 @@ ingress:
   annotations: {}
   ## @param ingress.hostname Ingress hostname
   ## @extra ingress.hostname Example: `"myapp.example.com"`
-  hostname: ""
+  hostname: "argocd.example.com"
 
 ## @section ConfigMap Environment Configuration
 configEnv:
