@@ -1,0 +1,16 @@
+{{- if .Values.gcp.database.enabled }}
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLDatabase
+metadata:
+  name: {{ include "service.fullname" . }}-db
+  labels:
+    {{- include "service.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+    cnrm.cloud.google.com/project-id: {{ .Values.gcp.projectId }}
+    cnrm.cloud.google.com/deletion-policy: abandon
+spec:
+  instanceRef:
+    external: {{ .Values.gcp.database.instanceName }}
+  resourceID: {{ .Values.gcp.database.databaseName | default .Release.Name }}
+{{- end }}

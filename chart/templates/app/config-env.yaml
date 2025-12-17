@@ -1,0 +1,14 @@
+{{- if .Values.configEnv.pairs }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "service.fullname" . }}-config-env
+  labels:
+    {{- include "service.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+data:
+{{- range $key, $value := .Values.configEnv.pairs }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}

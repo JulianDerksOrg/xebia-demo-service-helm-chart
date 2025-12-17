@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "service.fullname" . }}
+  labels:
+    {{- include "service.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.app.autoscaling.enabled }}
+  replicas: {{ .Values.app.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.app.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "service.labels" . | nindent 8 }}
+        {{- with .Values.app.labels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "service.serviceAccountName" . }}
+      {{- with .Values.app.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.app.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ include "service.targetPort" . }}
+              protocol: TCP
+          {{- if .Values.app.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.app.livenessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.app.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.app.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.app.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.app.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.app.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.app.readinessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.app.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.app.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.app.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.app.readinessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.app.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.app.startupProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.app.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.app.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.app.startupProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.app.startupProbe.failureThreshold }}
+          {{- end }}
+          {{- if or .Values.configEnv.pairs .Values.secretEnv.enabled }}
+          envFrom:
+            {{- if .Values.configEnv.pairs }}
+            - configMapRef:
+                name: {{ include "service.fullname" . }}-config-env
+            {{- end }}
+            {{- if .Values.secretEnv.enabled }}
+            - secretRef:
+                name: {{ include "service.fullname" . }}-secret-env
+            {{- end }}
+          {{- end }}
+          {{- with .Values.app.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.app.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.app.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.app.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.app.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.app.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

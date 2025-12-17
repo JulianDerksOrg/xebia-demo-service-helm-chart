@@ -1,0 +1,164 @@
+# yaml-language-server: $schema=./values.schema.json
+
+## @section Global Configuration
+## @param nameOverride Name override for the chart
+nameOverride: ""
+## @param fullnameOverride Full name override for the chart
+fullnameOverride: ""
+
+## @section Application Configuration
+app:
+  ## @param app.replicaCount Number of replicas
+  replicaCount: 1
+  ## @param app.annotations [object] Pod annotations
+  annotations: {}
+  ## @param app.labels [object] Pod labels
+  labels: {}
+  ## @param app.resources [object] Resource requests and limits
+  resources: {}
+  ## @param app.nodeSelector [object] Node selector
+  nodeSelector: {}
+  ## @param app.tolerations [array] Tolerations
+  tolerations: []
+  ## @param app.affinity [object] Affinity rules
+  affinity: {}
+  ## @param app.podSecurityContext [object] Pod security context
+  podSecurityContext: {}
+  ## @param app.securityContext [object] Container security context
+  securityContext: {}
+  ## @param app.volumes [array] Additional volumes
+  volumes: []
+  ## @param app.volumeMounts [array] Additional volume mounts
+  volumeMounts: []
+  autoscaling:
+    ## @param app.autoscaling.enabled Enable Horizontal Pod Autoscaler
+    enabled: true
+    ## @param app.autoscaling.minReplicas Minimum number of replicas
+    minReplicas: 1
+    ## @param app.autoscaling.maxReplicas Maximum number of replicas
+    maxReplicas: 10
+    ## @param app.autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage
+    targetCPUUtilizationPercentage: 80
+    ## @param app.autoscaling.targetMemoryUtilizationPercentage Target memory utilization percentage
+    targetMemoryUtilizationPercentage: ""
+  livenessProbe:
+    ## @param app.livenessProbe.enabled Enable liveness probe
+    enabled: true
+    ## @param app.livenessProbe.path Liveness probe path
+    path: /health
+    ## @param app.livenessProbe.initialDelaySeconds Initial delay seconds
+    initialDelaySeconds: 5
+    ## @param app.livenessProbe.periodSeconds Period seconds
+    periodSeconds: 10
+    ## @param app.livenessProbe.timeoutSeconds Timeout seconds
+    timeoutSeconds: 5
+    ## @param app.livenessProbe.failureThreshold Failure threshold
+    failureThreshold: 3
+  readinessProbe:
+    ## @param app.readinessProbe.enabled Enable readiness probe
+    enabled: true
+    ## @param app.readinessProbe.path Readiness probe path
+    path: /health
+    ## @param app.readinessProbe.initialDelaySeconds Initial delay seconds
+    initialDelaySeconds: 5
+    ## @param app.readinessProbe.periodSeconds Period seconds
+    periodSeconds: 10
+    ## @param app.readinessProbe.timeoutSeconds Timeout seconds
+    timeoutSeconds: 5
+    ## @param app.readinessProbe.failureThreshold Failure threshold
+    failureThreshold: 3
+  startupProbe:
+    ## @param app.startupProbe.enabled Enable startup probe
+    enabled: false
+    ## @param app.startupProbe.path Startup probe path
+    path: /health
+    ## @param app.startupProbe.initialDelaySeconds Initial delay seconds
+    initialDelaySeconds: 10
+    ## @param app.startupProbe.periodSeconds Period seconds
+    periodSeconds: 10
+    ## @param app.startupProbe.timeoutSeconds Timeout seconds
+    timeoutSeconds: 5
+    ## @param app.startupProbe.failureThreshold Failure threshold
+    failureThreshold: 30
+
+## @section Container Image Configuration
+image:
+  ## @param image.repository Container image repository
+  repository: ""
+  ## @param image.pullPolicy Image pull policy
+  pullPolicy: IfNotPresent
+  ## @param image.tag Image tag (defaults to chart appVersion)
+  tag: ""
+
+## @section Service Account Configuration
+serviceAccount:
+  ## @param serviceAccount.create Create a service account
+  create: true
+  ## @param serviceAccount.annotations [object] Annotations for the service account
+  annotations: {}
+  ## @param serviceAccount.name Service account name (generated if not set)
+  name: ""
+
+## @section Service Configuration
+service:
+  ## @param service.type Service type
+  type: ClusterIP
+  ## @param service.port Service port
+  port: 8080
+  ## @param service.targetPort Target port (defaults to service port)
+  targetPort: ""
+
+## @section Ingress Configuration
+ingress:
+  ## @param ingress.enabled Enable ingress
+  enabled: false
+  ## @param ingress.className Ingress class name
+  className: ""
+  ## @param ingress.annotations [object] Ingress annotations
+  annotations: {}
+  ## @param ingress.hosts [array] Ingress hosts
+  hosts: []
+  ## @param ingress.tls [array] Ingress TLS configuration
+  tls: []
+
+## @section ConfigMap Environment Configuration
+configEnv:
+  ## @param configEnv.pairs [object] ConfigMap environment variables (key-value pairs)
+  pairs: {}
+
+## @section External Secrets Configuration
+secretEnv:
+  ## @param secretEnv.enabled Enable External Secrets for environment variables
+  enabled: false
+  ## @param secretEnv.pairs [object] Secret key to GCP Secret Manager key mapping
+  pairs: {}
+  ## @param secretEnv.templatePairs [object] Template pairs for secret transformation
+  templatePairs: {}
+
+## @section Google Cloud Platform Configuration
+gcp:
+  ## @param gcp.projectId GCP project ID
+  projectId: ""
+  serviceAccount:
+    ## @param gcp.serviceAccount.enabled Enable GCP service account with Workload Identity
+    enabled: false
+  database:
+    ## @param gcp.database.enabled Enable Cloud SQL database resources
+    enabled: false
+    ## @param gcp.database.instanceName Cloud SQL instance name
+    instanceName: ""
+    ## @param gcp.database.databaseName Database name (defaults to release name)
+    databaseName: ""
+    ## @param gcp.database.userName Database user name (defaults to release name)
+    userName: ""
+    ## @param gcp.database.passwordSecretRef [object] Secret reference for database password
+    passwordSecretRef: {}
+  storage:
+    ## @param gcp.storage.enabled Enable GCS bucket resources
+    enabled: false
+    ## @param gcp.storage.location GCS bucket location
+    location: "europe-west4"
+    ## @param gcp.storage.storageClass GCS storage class
+    storageClass: "STANDARD"
+    ## @param gcp.storage.objectAdmins [array] IAM members with objectAdmin role
+    objectAdmins: []

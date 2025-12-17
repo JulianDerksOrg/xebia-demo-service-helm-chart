@@ -1,0 +1,354 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "nameOverride": {
+            "type": "string",
+            "description": "Name override for the chart",
+            "default": ""
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "description": "Full name override for the chart",
+            "default": ""
+        },
+        "app": {
+            "type": "object",
+            "properties": {
+                "replicaCount": {
+                    "type": "number",
+                    "description": "Number of replicas",
+                    "default": 1
+                },
+                "tolerations": {
+                    "type": "array",
+                    "description": "Tolerations",
+                    "default": "[]",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "volumes": {
+                    "type": "array",
+                    "description": "Additional volumes",
+                    "default": "[]",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "volumeMounts": {
+                    "type": "array",
+                    "description": "Additional volume mounts",
+                    "default": "[]",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "autoscaling": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable Horizontal Pod Autoscaler",
+                            "default": true
+                        },
+                        "minReplicas": {
+                            "type": "number",
+                            "description": "Minimum number of replicas",
+                            "default": 1
+                        },
+                        "maxReplicas": {
+                            "type": "number",
+                            "description": "Maximum number of replicas",
+                            "default": 10
+                        },
+                        "targetCPUUtilizationPercentage": {
+                            "type": "number",
+                            "description": "Target CPU utilization percentage",
+                            "default": 80
+                        },
+                        "targetMemoryUtilizationPercentage": {
+                            "type": "string",
+                            "description": "Target memory utilization percentage",
+                            "default": ""
+                        }
+                    }
+                },
+                "livenessProbe": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable liveness probe",
+                            "default": true
+                        },
+                        "path": {
+                            "type": "string",
+                            "description": "Liveness probe path",
+                            "default": "/health"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "number",
+                            "description": "Initial delay seconds",
+                            "default": 5
+                        },
+                        "periodSeconds": {
+                            "type": "number",
+                            "description": "Period seconds",
+                            "default": 10
+                        },
+                        "timeoutSeconds": {
+                            "type": "number",
+                            "description": "Timeout seconds",
+                            "default": 5
+                        },
+                        "failureThreshold": {
+                            "type": "number",
+                            "description": "Failure threshold",
+                            "default": 3
+                        }
+                    }
+                },
+                "readinessProbe": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable readiness probe",
+                            "default": true
+                        },
+                        "path": {
+                            "type": "string",
+                            "description": "Readiness probe path",
+                            "default": "/health"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "number",
+                            "description": "Initial delay seconds",
+                            "default": 5
+                        },
+                        "periodSeconds": {
+                            "type": "number",
+                            "description": "Period seconds",
+                            "default": 10
+                        },
+                        "timeoutSeconds": {
+                            "type": "number",
+                            "description": "Timeout seconds",
+                            "default": 5
+                        },
+                        "failureThreshold": {
+                            "type": "number",
+                            "description": "Failure threshold",
+                            "default": 3
+                        }
+                    }
+                },
+                "startupProbe": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable startup probe",
+                            "default": false
+                        },
+                        "path": {
+                            "type": "string",
+                            "description": "Startup probe path",
+                            "default": "/health"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "number",
+                            "description": "Initial delay seconds",
+                            "default": 10
+                        },
+                        "periodSeconds": {
+                            "type": "number",
+                            "description": "Period seconds",
+                            "default": 10
+                        },
+                        "timeoutSeconds": {
+                            "type": "number",
+                            "description": "Timeout seconds",
+                            "default": 5
+                        },
+                        "failureThreshold": {
+                            "type": "number",
+                            "description": "Failure threshold",
+                            "default": 30
+                        }
+                    }
+                }
+            }
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "repository": {
+                    "type": "string",
+                    "description": "Container image repository",
+                    "default": ""
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "description": "Image pull policy",
+                    "default": "IfNotPresent"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "Image tag (defaults to chart appVersion)",
+                    "default": ""
+                }
+            }
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "description": "Create a service account",
+                    "default": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Service account name (generated if not set)",
+                    "default": ""
+                }
+            }
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Service type",
+                    "default": "ClusterIP"
+                },
+                "port": {
+                    "type": "number",
+                    "description": "Service port",
+                    "default": 8080
+                },
+                "targetPort": {
+                    "type": "string",
+                    "description": "Target port (defaults to service port)",
+                    "default": ""
+                }
+            }
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable ingress",
+                    "default": false
+                },
+                "className": {
+                    "type": "string",
+                    "description": "Ingress class name",
+                    "default": ""
+                },
+                "hosts": {
+                    "type": "array",
+                    "description": "Ingress hosts",
+                    "default": "[]",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tls": {
+                    "type": "array",
+                    "description": "Ingress TLS configuration",
+                    "default": "[]",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "secretEnv": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable External Secrets for environment variables",
+                    "default": false
+                }
+            }
+        },
+        "gcp": {
+            "type": "object",
+            "properties": {
+                "projectId": {
+                    "type": "string",
+                    "description": "GCP project ID",
+                    "default": ""
+                },
+                "serviceAccount": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable GCP service account with Workload Identity",
+                            "default": false
+                        }
+                    }
+                },
+                "database": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable Cloud SQL database resources",
+                            "default": false
+                        },
+                        "instanceName": {
+                            "type": "string",
+                            "description": "Cloud SQL instance name",
+                            "default": ""
+                        },
+                        "databaseName": {
+                            "type": "string",
+                            "description": "Database name (defaults to release name)",
+                            "default": ""
+                        },
+                        "userName": {
+                            "type": "string",
+                            "description": "Database user name (defaults to release name)",
+                            "default": ""
+                        }
+                    }
+                },
+                "storage": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Enable GCS bucket resources",
+                            "default": false
+                        },
+                        "location": {
+                            "type": "string",
+                            "description": "GCS bucket location",
+                            "default": "europe-west4"
+                        },
+                        "storageClass": {
+                            "type": "string",
+                            "description": "GCS storage class",
+                            "default": "STANDARD"
+                        },
+                        "objectAdmins": {
+                            "type": "array",
+                            "description": "IAM members with objectAdmin role",
+                            "default": "[]",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
