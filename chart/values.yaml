@@ -24,7 +24,13 @@ app:
   ## @extra app.resources   cpu: 500m
   ## @extra app.resources   memory: 256Mi
   ## @extra app.resources ```
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
   ## @param app.nodeSelector [object] Node selector
   nodeSelector: {}
   ## @param app.tolerations [array] Tolerations
