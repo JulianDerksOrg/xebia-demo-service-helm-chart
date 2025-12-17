@@ -29,7 +29,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "service.fullname" . }}
           {{- with .Values.app.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
