@@ -111,8 +111,6 @@ serviceAccount:
   create: true
   ## @param serviceAccount.annotations [object] Annotations for the service account
   annotations: {}
-  ## @param serviceAccount.name Service account name (generated if not set)
-  name: ""
 
 ## @section Service Configuration
 service:
