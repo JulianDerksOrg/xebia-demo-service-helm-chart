@@ -12,7 +12,7 @@ metadata:
     cnrm.cloud.google.com/force-destroy: "false"
 spec:
   location: {{ .Values.gcp.storage.location | default "europe-west4" }}
-  resourceID: {{ .Values.gcp.projectId }}-{{ include "service.fullname" . }}
+  resourceID: {{ .Values.gcp.projectId }}-{{ include "service.fullname" . }}-{{ .Values.gcp.projectKey }}
   storageClass: {{ .Values.gcp.storage.storageClass | default "STANDARD" }}
   uniformBucketLevelAccess: true
 {{- end }}

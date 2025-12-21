@@ -17,5 +17,5 @@ spec:
       secretKeyRef:
         name: {{ include "service.fullname" . }}-secret-env
         key: DB_PASSWORD
-  resourceID: {{ .Values.gcp.database.userName | default .Release.Name }}
+  resourceID: {{ include "service.fullname" . }}
 {{- end }}

@@ -153,8 +153,11 @@ secretEnv:
 ## @section Google Cloud Platform Configuration
 gcp:
   ## @param gcp.projectId GCP project ID
-  ## @extra gcp.projectId Example: `"my-gcp-project-123"`
+  ## @extra gcp.projectId Example: `"my-gcp-project"`
   projectId: ""
+  ## @param gcp.projectKey GCP project key
+  ## @extra gcp.projectKey Example: `"13263076404528"`
+  projectKey: ""
   serviceAccount:
     ## @param gcp.serviceAccount.enabled Enable GCP service account with Workload Identity
     enabled: false
@@ -162,12 +165,7 @@ gcp:
     ## @param gcp.database.enabled Enable Cloud SQL database resources
     enabled: false
     ## @param gcp.database.instanceName Cloud SQL instance name
-    ## @extra gcp.database.instanceName Example: `"my-project:europe-west4:my-instance"`
-    instanceName: ""
-    ## @param gcp.database.databaseName Database name (defaults to release name)
-    databaseName: ""
-    ## @param gcp.database.userName Database user name (defaults to release name)
-    userName: ""
+    instanceName: "my-csql-instance"
   storage:
     ## @param gcp.storage.enabled Enable GCS bucket resources
     enabled: false

@@ -12,5 +12,5 @@ metadata:
 spec:
   instanceRef:
     external: {{ .Values.gcp.database.instanceName }}
-  resourceID: {{ .Values.gcp.database.databaseName | default .Release.Name }}
+  resourceID: {{ include "service.fullname" . }}
 {{- end }}
