@@ -6,10 +6,6 @@
 
 A generic Helm chart for deploying microservices.
 
-<p align="left">
-  <img src="../docs/logos/primetoday.png" alt="PrimeToday" width="150">
-</p>
-
 ## Parameters
 
 ### Global Configuration
