@@ -7,6 +7,8 @@ metadata:
     cnrm.cloud.google.com/project-id: {{ .Values.gcp.projectId }}
 spec:
   displayName: "{{ include "service.fullname" . }} Uptime Check"
+  projectRef:
+    external: {{ .Values.gcp.projectId }}
   monitoredResource:
     type: uptime_url
     filterLabels:

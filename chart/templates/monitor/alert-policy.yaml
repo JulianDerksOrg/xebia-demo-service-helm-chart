@@ -38,5 +38,6 @@ spec:
     notificationChannelStrategy:
       - notificationChannelNames:
           - {{ .Values.gcp.monitoring.notificationChannel }}
+        renotifyInterval: 5m
   {{- end }}
 {{- end }}
