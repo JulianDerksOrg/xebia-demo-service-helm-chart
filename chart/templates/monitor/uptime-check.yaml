@@ -11,6 +11,7 @@ spec:
     type: "uptime_url"
     labels:
       host: {{ .Values.ingress.hostname | quote }}
+      project_id: {{ .Values.gcp.projectId | quote }}
   httpCheck:
     path: "/health"
     requestMethod: "GET"

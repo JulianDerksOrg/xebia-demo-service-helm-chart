@@ -86,7 +86,7 @@ spec:
           {{- end }}
           env:
           - name: VERSION
-            value: "{{ .Values.image.tag }}"
+            value: {{ .Values.image.tag }}
           {{- with .Values.app.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

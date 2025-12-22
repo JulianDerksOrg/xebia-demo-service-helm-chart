@@ -32,6 +32,6 @@ spec:
         count: 1
   {{- if .Values.gcp.monitoring.notificationChannel }}
   notificationChannels:
-    - {{ .Values.gcp.monitoring.notificationChannel }}
+    - name: {{ .Values.gcp.monitoring.notificationChannel }}
 {{- end }}
 {{- end }}
