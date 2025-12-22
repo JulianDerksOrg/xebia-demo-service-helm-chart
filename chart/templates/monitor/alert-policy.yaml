@@ -12,6 +12,7 @@ spec:
       Alert triggered when {{ .Values.ingress.hostname }} is down or unhealthy.
       Service: {{ include "service.fullname" . }}
       Environment: {{ .Release.Namespace }}
+
   combiner: OR
   enabled: true
   severity: ERROR
@@ -25,19 +26,17 @@ spec:
           AND resource.labels.host="{{ .Values.ingress.hostname }}"
           AND resource.labels.project_id="{{ .Values.gcp.projectId }}"
         aggregations:
-          - alignmentPeriod: "300s"
+          - alignmentPeriod: 300s
             perSeriesAligner: ALIGN_FRACTION_TRUE
         comparison: COMPARISON_LT
         thresholdValue: 0.9
-        duration: "300s"
+        duration: 300s
         trigger:
           count: 1
 
   {{- if .Values.gcp.monitoring.notificationChannel }}
-  alertStrategy:
-    notificationChannelStrategy:
-      - notificationChannelNames:
-          - {{ .Values.gcp.monitoring.notificationChannel }}
-        renotifyInterval: 300s
+  notificationChannels:
+    - name: {{ .Values.gcp.monitoring.notificationChannel }}
   {{- end }}
+
 {{- end }}
