@@ -19,7 +19,9 @@ spec:
     requestMethod: GET
     useSsl: false
   selectedRegions:
+    - USA
     - EUROPE
+    - ASIA_PACIFIC
   period: 60s
   timeout: 10s
   isInternal: false
