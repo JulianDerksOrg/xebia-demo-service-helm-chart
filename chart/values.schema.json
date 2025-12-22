@@ -291,11 +291,6 @@
                             "type": "boolean",
                             "description": "Enable uptime monitoring and alerts",
                             "default": true
-                        },
-                        "notificationChannel": {
-                            "type": "string",
-                            "description": "Existing notification channel name",
-                            "default": ""
                         }
                     }
                 }
