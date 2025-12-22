@@ -161,3 +161,9 @@ gcp:
     enabled: false
     ## @param gcp.database.instanceName Cloud SQL instance name
     instanceName: "my-csql-instance"
+  ## @section GCP Monitoring Configuration
+  monitoring:
+    ## @param gcp.monitoring.enabled Enable uptime monitoring and alerts
+    enabled: true
+    ## @param gcp.monitoring.notificationChannel Existing notification channel name
+    notificationChannel: ""

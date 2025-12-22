@@ -1,0 +1,37 @@
+{{- if and .Values.ingress.enabled .Values.gcp.monitoring.enabled }}
+apiVersion: monitoring.cnrm.cloud.google.com/v1beta1
+kind: MonitoringAlertPolicy
+metadata:
+  name: {{ include "service.fullname" . }}-uptime-alert
+  annotations:
+    cnrm.cloud.google.com/project-id: {{ .Values.gcp.projectId }}
+spec:
+  displayName: "{{ include "service.fullname" . }} Uptime Alert"
+  documentation:
+    content: |
+      Alert triggered when {{ .Values.ingress.hostname }} is down or unhealthy.
+      Service: {{ include "service.fullname" . }}
+      Environment: {{ .Release.Namespace }}
+  combiner: OR
+  enabled: true
+  severity: ERROR
+  conditions:
+  - displayName: "Uptime Check Failure"
+    conditionThreshold:
+      filter: >
+        metric.type="monitoring.googleapis.com/uptime_check/check_passed"
+        AND resource.type="uptime_url"
+        AND resource.labels.host="{{ .Values.gcp.projectId }}"
+      aggregations:
+      - alignmentPeriod: "300s"
+        perSeriesAligner: ALIGN_FRACTION_TRUE
+      comparison: COMPARISON_LT
+      thresholdValue: 0.9
+      duration: "300s"
+      trigger:
+        count: 1
+  {{- if .Values.gcp.monitoring.notificationChannel }}
+  notificationChannels:
+    - {{ .Values.gcp.monitoring.notificationChannel }}
+{{- end }}
+{{- end }}
