@@ -164,4 +164,4 @@ gcp:
   ## @section GCP Monitoring Configuration
   monitoring:
     ## @param gcp.monitoring.enabled Enable uptime monitoring and alerts
-    enabled: true
+    enabled: false
