@@ -33,10 +33,4 @@ spec:
         duration: 300s
         trigger:
           count: 1
-
-  {{- if .Values.gcp.monitoring.notificationChannel }}
-  notificationChannels:
-    - name: {{ .Values.gcp.monitoring.notificationChannel }}
-  {{- end }}
-
 {{- end }}
