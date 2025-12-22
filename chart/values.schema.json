@@ -208,11 +208,6 @@
                     "type": "boolean",
                     "description": "Create a service account",
                     "default": true
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Service account name (generated if not set)",
-                    "default": ""
                 }
             }
         },
@@ -242,7 +237,7 @@
                 "enabled": {
                     "type": "boolean",
                     "description": "Enable ingress",
-                    "default": true
+                    "default": false
                 },
                 "className": {
                     "type": "string",
@@ -252,7 +247,7 @@
                 "hostname": {
                     "type": "string",
                     "description": "Ingress hostname",
-                    "default": "argocd.example.com"
+                    "default": "myapp.example.com"
                 }
             }
         },
@@ -285,45 +280,22 @@
                         "instanceName": {
                             "type": "string",
                             "description": "Cloud SQL instance name",
-                            "default": ""
-                        },
-                        "databaseName": {
-                            "type": "string",
-                            "description": "Database name (defaults to release name)",
-                            "default": ""
-                        },
-                        "userName": {
-                            "type": "string",
-                            "description": "Database user name (defaults to release name)",
-                            "default": ""
+                            "default": "my-csql-instance"
                         }
                     }
                 },
-                "storage": {
+                "monitoring": {
                     "type": "object",
                     "properties": {
                         "enabled": {
                             "type": "boolean",
-                            "description": "Enable GCS bucket resources",
-                            "default": false
+                            "description": "Enable uptime monitoring and alerts",
+                            "default": true
                         },
-                        "location": {
+                        "notificationChannel": {
                             "type": "string",
-                            "description": "GCS bucket location",
-                            "default": "europe-west4"
-                        },
-                        "storageClass": {
-                            "type": "string",
-                            "description": "GCS storage class",
-                            "default": "STANDARD"
-                        },
-                        "objectAdmins": {
-                            "type": "array",
-                            "description": "IAM members with objectAdmin role",
-                            "default": "[]",
-                            "items": {
-                                "type": "string"
-                            }
+                            "description": "Existing notification channel name",
+                            "default": ""
                         }
                     }
                 }

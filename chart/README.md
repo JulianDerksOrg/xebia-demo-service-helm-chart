@@ -27,15 +27,6 @@ A generic Helm chart for deploying microservices.
 | `app.annotations`                                   | Pod annotations                      | `{}`      |
 | `app.labels`                                        | Pod labels                           | `{}`      |
 | `app.resources`                                     | Resource requests and limits         | `{}`      |
-| `app.resources`                                     | Example:                             |           |
-| `app.resources`                                     | ```yaml                              |           |
-| `app.resources`                                     | requests:                            |           |
-| `app.resources`                                     | cpu: 100m                            |           |
-| `app.resources`                                     | memory: 128Mi                        |           |
-| `app.resources`                                     | limits:                              |           |
-| `app.resources`                                     | cpu: 500m                            |           |
-| `app.resources`                                     | memory: 256Mi                        |           |
-| `app.resources`                                     | ```                                  |           |
 | `app.nodeSelector`                                  | Node selector                        | `{}`      |
 | `app.tolerations`                                   | Tolerations                          | `[]`      |
 | `app.affinity`                                      | Affinity rules                       | `{}`      |
@@ -77,11 +68,10 @@ A generic Helm chart for deploying microservices.
 
 ### Service Account Configuration
 
-| Name                         | Description                                 | Value  |
-| ---------------------------- | ------------------------------------------- | ------ |
-| `serviceAccount.create`      | Create a service account                    | `true` |
-| `serviceAccount.annotations` | Annotations for the service account         | `{}`   |
-| `serviceAccount.name`        | Service account name (generated if not set) | `""`   |
+| Name                         | Description                         | Value  |
+| ---------------------------- | ----------------------------------- | ------ |
+| `serviceAccount.create`      | Create a service account            | `true` |
+| `serviceAccount.annotations` | Annotations for the service account | `{}`   |
 
 ### Service Configuration
 
@@ -93,46 +83,40 @@ A generic Helm chart for deploying microservices.
 
 ### Ingress Configuration
 
-| Name                  | Description                    | Value                |
-| --------------------- | ------------------------------ | -------------------- |
-| `ingress.enabled`     | Enable ingress                 | `true`               |
-| `ingress.className`   | Ingress class name             | `nginx`              |
-| `ingress.annotations` | Ingress annotations            | `{}`                 |
-| `ingress.hostname`    | Ingress hostname               | `argocd.example.com` |
-| `ingress.hostname`    | Example: `"myapp.example.com"` |                      |
+| Name                  | Description         | Value               |
+| --------------------- | ------------------- | ------------------- |
+| `ingress.enabled`     | Enable ingress      | `false`             |
+| `ingress.className`   | Ingress class name  | `nginx`             |
+| `ingress.annotations` | Ingress annotations | `{}`                |
+| `ingress.hostname`    | Ingress hostname    | `myapp.example.com` |
 
 ### ConfigMap Environment Configuration
 
-| Name              | Description                                        | Value |
-| ----------------- | -------------------------------------------------- | ----- |
-| `configEnv.pairs` | ConfigMap environment variables (key-value pairs)  | `{}`  |
-| `configEnv.pairs` | Example: `{ VERSION: "1.0.0", LOG_LEVEL: "info" }` |       |
+| Name              | Description                                       | Value |
+| ----------------- | ------------------------------------------------- | ----- |
+| `configEnv.pairs` | ConfigMap environment variables (key-value pairs) | `{}`  |
 
 ### External Secrets Configuration
 
-| Name                      | Description                                                  | Value |
-| ------------------------- | ------------------------------------------------------------ | ----- |
-| `secretEnv.pairs`         | Secret key to GCP Secret Manager key mapping                 | `{}`  |
-| `secretEnv.pairs`         | Example: `{ DB_PASSWORD: "my-project/db-password" }`         |       |
-| `secretEnv.templatePairs` | Template pairs for secret transformation                     | `{}`  |
-| `secretEnv.templatePairs` | Example: `{ DATABASE_URL: "{{ .DB_PASSWORD | toString }}" }` |       |
+| Name                      | Description                                  | Value |
+| ------------------------- | -------------------------------------------- | ----- |
+| `secretEnv.pairs`         | Secret key to GCP Secret Manager key mapping | `{}`  |
+| `secretEnv.templatePairs` | Template pairs for secret transformation     | `{}`  |
 
 ### Google Cloud Platform Configuration
 
-| Name                         | Description                                       | Value          |
-| ---------------------------- | ------------------------------------------------- | -------------- |
-| `gcp.projectId`              | GCP project ID                                    | `""`           |
-| `gcp.projectId`              | Example: `"my-gcp-project-123"`                   |                |
-| `gcp.serviceAccount.enabled` | Enable GCP service account with Workload Identity | `false`        |
-| `gcp.database.enabled`       | Enable Cloud SQL database resources               | `false`        |
-| `gcp.database.instanceName`  | Cloud SQL instance name                           | `""`           |
-| `gcp.database.instanceName`  | Example: `"my-project:europe-west4:my-instance"`  |                |
-| `gcp.database.databaseName`  | Database name (defaults to release name)          | `""`           |
-| `gcp.database.userName`      | Database user name (defaults to release name)     | `""`           |
-| `gcp.storage.enabled`        | Enable GCS bucket resources                       | `false`        |
-| `gcp.storage.location`       | GCS bucket location                               | `europe-west4` |
-| `gcp.storage.storageClass`   | GCS storage class                                 | `STANDARD`     |
-| `gcp.storage.objectAdmins`   | IAM members with objectAdmin role                 | `[]`           |
-| `gcp.storage.objectAdmins`   | Example: `["group:developers@myorg.com"]`         |                |
+| Name                         | Description                                       | Value              |
+| ---------------------------- | ------------------------------------------------- | ------------------ |
+| `gcp.projectId`              | GCP project ID                                    | `""`               |
+| `gcp.serviceAccount.enabled` | Enable GCP service account with Workload Identity | `false`            |
+| `gcp.database.enabled`       | Enable Cloud SQL database resources               | `false`            |
+| `gcp.database.instanceName`  | Cloud SQL instance name                           | `my-csql-instance` |
+
+### GCP Monitoring Configuration
+
+| Name                                 | Description                         | Value  |
+| ------------------------------------ | ----------------------------------- | ------ |
+| `gcp.monitoring.enabled`             | Enable uptime monitoring and alerts | `true` |
+| `gcp.monitoring.notificationChannel` | Existing notification channel name  | `""`   |
 
 <!-- This section will be auto-generated by readme-generator -->

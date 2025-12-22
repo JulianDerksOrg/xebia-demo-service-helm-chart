@@ -15,15 +15,15 @@ app:
   ## @param app.labels [object] Pod labels
   labels: {}
   ## @param app.resources [object] Resource requests and limits
-  ## @extra app.resources Example:
-  ## @extra app.resources ```yaml
-  ## @extra app.resources requests:
-  ## @extra app.resources   cpu: 100m
-  ## @extra app.resources   memory: 128Mi
-  ## @extra app.resources limits:
-  ## @extra app.resources   cpu: 500m
-  ## @extra app.resources   memory: 256Mi
-  ## @extra app.resources ```
+  ##  app.resources Example:
+  ##  app.resources ```yaml
+  ##  app.resources requests:
+  ##  app.resources   cpu: 100m
+  ##  app.resources   memory: 128Mi
+  ##  app.resources limits:
+  ##  app.resources   cpu: 500m
+  ##  app.resources   memory: 256Mi
+  ##  app.resources ```
   resources:
     requests:
       cpu: 100m
@@ -130,28 +130,28 @@ ingress:
   ## @param ingress.annotations [object] Ingress annotations
   annotations: {}
   ## @param ingress.hostname Ingress hostname
-  ## @extra ingress.hostname Example: `"myapp.example.com"`
+  ##  ingress.hostname Example: `"myapp.example.com"`
   hostname: "myapp.example.com"
 
 ## @section ConfigMap Environment Configuration
 configEnv:
   ## @param configEnv.pairs [object] ConfigMap environment variables (key-value pairs)
-  ## @extra configEnv.pairs Example: `{ VERSION: "1.0.0", LOG_LEVEL: "info" }`
+  ##  configEnv.pairs Example: `{ VERSION: "1.0.0", LOG_LEVEL: "info" }`
   pairs: {}
 
 ## @section External Secrets Configuration
 secretEnv:
   ## @param secretEnv.pairs [object] Secret key to GCP Secret Manager key mapping
-  ## @extra secretEnv.pairs Example: `{ DB_PASSWORD: "my-project/db-password" }`
+  ##  secretEnv.pairs Example: `{ DB_PASSWORD: "my-project/db-password" }`
   pairs: {}
   ## @param secretEnv.templatePairs [object] Template pairs for secret transformation
-  ## @extra secretEnv.templatePairs Example: `{ DATABASE_URL: "{{ .DB_PASSWORD | toString }}" }`
+  ##  secretEnv.templatePairs Example: `{ DATABASE_URL: "{{ .DB_PASSWORD | toString }}" }`
   templatePairs: {}
 
 ## @section Google Cloud Platform Configuration
 gcp:
   ## @param gcp.projectId GCP project ID
-  ## @extra gcp.projectId Example: `"my-gcp-project"`
+  ## gcp.projectId Example: `"my-gcp-project"`
   projectId: ""
   serviceAccount:
     ## @param gcp.serviceAccount.enabled Enable GCP service account with Workload Identity
