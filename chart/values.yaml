@@ -124,14 +124,14 @@ service:
 ## @section Ingress Configuration
 ingress:
   ## @param ingress.enabled Enable ingress
-  enabled: true
+  enabled: false
   ## @param ingress.className Ingress class name
   className: "nginx"
   ## @param ingress.annotations [object] Ingress annotations
   annotations: {}
   ## @param ingress.hostname Ingress hostname
   ## @extra ingress.hostname Example: `"myapp.example.com"`
-  hostname: "argocd.example.com"
+  hostname: "myapp.example.com"
 
 ## @section ConfigMap Environment Configuration
 configEnv:
@@ -153,9 +153,6 @@ gcp:
   ## @param gcp.projectId GCP project ID
   ## @extra gcp.projectId Example: `"my-gcp-project"`
   projectId: ""
-  ## @param gcp.projectKey GCP project key
-  ## @extra gcp.projectKey Example: `"13263076404528"`
-  projectKey: ""
   serviceAccount:
     ## @param gcp.serviceAccount.enabled Enable GCP service account with Workload Identity
     enabled: false
@@ -164,13 +161,3 @@ gcp:
     enabled: false
     ## @param gcp.database.instanceName Cloud SQL instance name
     instanceName: "my-csql-instance"
-  storage:
-    ## @param gcp.storage.enabled Enable GCS bucket resources
-    enabled: false
-    ## @param gcp.storage.location GCS bucket location
-    location: "europe-west4"
-    ## @param gcp.storage.storageClass GCS storage class
-    storageClass: "STANDARD"
-    ## @param gcp.storage.objectAdmins [array] IAM members with objectAdmin role
-    ## @extra gcp.storage.objectAdmins Example: `["group:developers@myorg.com"]`
-    objectAdmins: []

@@ -8,7 +8,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-10"
     cnrm.cloud.google.com/project-id: {{ .Values.gcp.projectId }}
-    cnrm.cloud.google.com/deletion-policy: abandon
+    # cnrm.cloud.google.com/deletion-policy: abandon
 spec:
   instanceRef:
     external: {{ .Values.gcp.database.instanceName }}
