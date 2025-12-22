@@ -8,17 +8,17 @@ metadata:
 spec:
   displayName: "{{ include "service.fullname" . }} Uptime Check"
   monitoredResource:
-    type: "uptime_url"
-    labels:
+    type: uptime_url
+    filterLabels:
       host: {{ .Values.ingress.hostname | quote }}
       project_id: {{ .Values.gcp.projectId | quote }}
   httpCheck:
     path: "/health"
-    requestMethod: "GET"
+    requestMethod: GET
     useSsl: false
   selectedRegions:
     - EUROPE
-  period: "60s"
-  timeout: "10s"
+  period: 60s
+  timeout: 10s
   isInternal: false
 {{- end }}

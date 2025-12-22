@@ -15,23 +15,28 @@ spec:
   combiner: OR
   enabled: true
   severity: ERROR
+
   conditions:
-  - displayName: "Uptime Check Failure"
-    conditionThreshold:
-      filter: >
-        metric.type="monitoring.googleapis.com/uptime_check/check_passed"
-        AND resource.type="uptime_url"
-        AND resource.labels.host="{{ .Values.gcp.projectId }}"
-      aggregations:
-      - alignmentPeriod: "300s"
-        perSeriesAligner: ALIGN_FRACTION_TRUE
-      comparison: COMPARISON_LT
-      thresholdValue: 0.9
-      duration: "300s"
-      trigger:
-        count: 1
+    - displayName: "Uptime Check Failure"
+      conditionThreshold:
+        filter: >
+          metric.type="monitoring.googleapis.com/uptime_check/check_passed"
+          AND resource.type="uptime_url"
+          AND resource.labels.host="{{ .Values.ingress.hostname }}"
+          AND resource.labels.project_id="{{ .Values.gcp.projectId }}"
+        aggregations:
+          - alignmentPeriod: "300s"
+            perSeriesAligner: ALIGN_FRACTION_TRUE
+        comparison: COMPARISON_LT
+        thresholdValue: 0.9
+        duration: "300s"
+        trigger:
+          count: 1
+
   {{- if .Values.gcp.monitoring.notificationChannel }}
-  notificationChannels:
-    - name: {{ .Values.gcp.monitoring.notificationChannel }}
-{{- end }}
+  alertStrategy:
+    notificationChannelStrategy:
+      - notificationChannelNames:
+          - {{ .Values.gcp.monitoring.notificationChannel }}
+  {{- end }}
 {{- end }}
